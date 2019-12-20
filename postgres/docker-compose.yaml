@@ -1,0 +1,24 @@
+version: '2.1'
+networks:
+  backing-services:
+    driver: bridge
+volumes:
+  postgresql-etc: {}
+  postgresql-data: {}
+services:
+  postgres:
+    image: postgres:9.4-alpine
+    container_name: postgresql
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_PORT: 5432
+    ports: ['5432:5432']
+    networks:
+      backing-services:
+        aliases:
+          - pg
+          - db
+          - postgres
+
