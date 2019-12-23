@@ -5,12 +5,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import static org.springframework.web.reactive.function.server.RequestPredicates.path;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
 public class TweetRouter {
+
     @Bean
-    RouterFunction<ServerResponse> routes(TweetHandler handler) {
-        return route().GET("/tweets/{author}", handler::getTweet).build();
+    RouterFunction<ServerResponse> routes(TweetHandlers handlers) {
+        return route().GET("/tweets/{author}", handlers::getTweet)
+                      .build()
+                      .andRoute(path("/**"), handlers::getFallback);
     }
 }

@@ -12,6 +12,8 @@ _unix_
 ```cmd
 ./mvnw -f postgres docker-compose:up
 ./mvnw -f server process-resources flyway:migrate
+./mvnw -f server spring-boot:run
+./mvnw -f client spring-boot:run
 ```
 
 ## prod mode

@@ -1,12 +1,13 @@
 package com.example.client.tweet;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor(staticName = "of")
+@RequiredArgsConstructor(staticName = "of")
 public class TweetRequest {
+    @NonNull
     private String author;
+    private Integer size = 25;
 }

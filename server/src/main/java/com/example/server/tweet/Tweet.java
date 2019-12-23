@@ -8,14 +8,17 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-@Table(value = "tweets")
 @NoArgsConstructor
+@Table(value = "tweets")
 @RequiredArgsConstructor
 public class Tweet {
+
     @Id
     private Long id;
+
     @NonNull
     private String author;
+
     @NonNull
     private String body;
 }

@@ -1,0 +1,8 @@
+GET http://localhost:8080/ololo
+Accept: application/json
+
+###
+GET http://localhost:8080/tweets/Mike
+Accept: application/json
+
+###

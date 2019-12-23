@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TweetRequest {
     private String author;
+    private int size = 25;
 }

@@ -1,15 +1,16 @@
 package com.example.client.tweet;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tweet {
+@RequiredArgsConstructor(staticName = "of")
+public class TweetResponse {
+
     private Long id;
     private String author;
+
+    @NonNull
     private String body;
 }
