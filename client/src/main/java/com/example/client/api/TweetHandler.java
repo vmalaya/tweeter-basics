@@ -2,6 +2,7 @@ package com.example.client.api;
 
 import com.example.client.tweet.Tweet;
 import com.example.client.tweet.TweetRequest;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class TweetHandler {
-    @Autowired
     private RSocketRequester rSocketRequester;
 
     public Mono<ServerResponse> getTweet(ServerRequest serverRequest) {
