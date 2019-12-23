@@ -6,6 +6,9 @@ import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import reactor.core.publisher.Flux;
 
 public interface TweetRepository extends R2dbcRepository<Tweet, Long> {
-    @Query("select * from tweets where author = $1")
+    @Query("select t from tweets t where t.author = Mike")
     Flux<Tweet> findByAuthor(String author);
+
+    @Query("select t from tweets t where t.author = 'Mike'")
+    Flux<Tweet> findMikesTweets();
 }

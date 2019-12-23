@@ -8,6 +8,8 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
 
+import java.util.Collections;
+
 @Controller
 public class TweetRSocketController {
     @Autowired
@@ -15,7 +17,9 @@ public class TweetRSocketController {
 
     @MessageMapping("tweets")
     public Flux<Tweet> getTweet(TweetRequest request) {
+        return repository.findMikesTweets();
+//        return repository.findAllById(Collections.singleton(Long.valueOf(request.getAuthor())));
 //        return repository.findByAuthor(request.getAuthor());
-        return Flux.just(new Tweet(request.getAuthor(), "Tweet From "+ request.getAuthor()));
+//        return Flux.just(new Tweet(request.getAuthor(), "Tweet From "+ request.getAuthor()));
     }
 }
