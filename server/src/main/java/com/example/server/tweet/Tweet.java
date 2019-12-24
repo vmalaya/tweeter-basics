@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @Table(value = "tweets")
 @RequiredArgsConstructor
-public class Tweet {
+public class  Tweet {
 
     @Id
     private Long id;

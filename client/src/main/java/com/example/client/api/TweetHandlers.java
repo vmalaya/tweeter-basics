@@ -44,8 +44,6 @@ public class TweetHandlers {
                              //.contentType(MediaType.APPLICATION_STREAM_JSON)
                              .contentType(MediaType.TEXT_EVENT_STREAM)
                              .body(tweets, TweetResponse.class);
-        // return ServerResponse.ok().body(tweets.("tweets")
-        //                 .data(new TweetRequest(author)).retrieveFlux(Tweet.class), Tweet.class);
     }
 
     public Mono<ServerResponse> getFallback(ServerRequest serverRequest) {
