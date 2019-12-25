@@ -46,6 +46,18 @@ public class TweetHandlers {
                              .body(tweets, TweetResponse.class);
     }
 
+    public Mono<ServerResponse> saveTweet(ServerRequest request){
+        String author = request.pathVariable("author");
+        Mono<TweetResponse> sentTweet = requester.flatMap(rSocket -> rSocket.route("send")
+                                                                       .data(Mono.just(TweetRequest.of(author)),
+                                                                             TweetRequest.class)
+                                                                       .retrieveMono(TweetResponse.class));
+        return ServerResponse.ok()
+                             .contentType(MediaType.APPLICATION_JSON)
+                             .body(sentTweet, TweetResponse.class);
+
+    }
+
     public Mono<ServerResponse> getFallback(ServerRequest serverRequest) {
         URI uri = serverRequest.uri();
         String baseUrl = String.format("%s://%s", uri.getScheme(), uri.getAuthority());
