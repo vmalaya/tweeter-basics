@@ -7,7 +7,6 @@ import lombok.*;
 @AllArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
 public class TweetResponse {
-
     private String author;
 
     @NonNull

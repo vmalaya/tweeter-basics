@@ -6,23 +6,17 @@ import com.example.client.tweet.TweetRequest;
 import com.example.client.tweet.TweetResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.expression.spel.ast.TypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.BufferOverflowStrategy;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @Log4j2
 @Service
@@ -41,7 +35,7 @@ public class TweetHandlers {
                 //     log.error("throwable: {}", throwable.getLocalizedMessage());
                 //     log.error("obj: {}", obj);
                 // })
-//                                              .take(2) // pagination
+                // take(2) // pagination
                 ;
         return ServerResponse.ok()
                 //.contentType(MediaType.APPLICATION_STREAM_JSON)
