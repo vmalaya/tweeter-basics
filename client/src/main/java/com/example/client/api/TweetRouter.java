@@ -14,8 +14,8 @@ public class TweetRouter {
     @Bean
     RouterFunction<ServerResponse> routes(TweetHandlers handlers) {
         return route().GET("/tweets/{author}", handlers::getTweet)
-                      .POST("/send/{author}", handlers::saveTweet)
-                      .build()
-                      .andRoute(path("/**"), handlers::getFallback);
+                .POST("/send/{author}", handlers::saveTweet)
+                .build()
+                .andRoute(path("/**"), handlers::getFallback);
     }
 }

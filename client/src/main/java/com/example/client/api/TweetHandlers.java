@@ -38,7 +38,7 @@ public class TweetHandlers {
                                               //     log.error("throwable: {}", throwable.getLocalizedMessage());
                                               //     log.error("obj: {}", obj);
                                               // })
-                                              .take(2) // pagination
+//                                              .take(2) // pagination
                 ;
         return ServerResponse.ok()
                              //.contentType(MediaType.APPLICATION_STREAM_JSON)
@@ -49,8 +49,7 @@ public class TweetHandlers {
     public Mono<ServerResponse> saveTweet(ServerRequest request){
         String author = request.pathVariable("author");
         Mono<TweetResponse> sentTweet = requester.flatMap(rSocket -> rSocket.route("send")
-                                                                       .data(Mono.just(TweetRequest.of(author)),
-                                                                             TweetRequest.class)
+                                                                       .data(Mono.just(TweetRequest.of(author)))
                                                                        .retrieveMono(TweetResponse.class));
         return ServerResponse.ok()
                              .contentType(MediaType.APPLICATION_JSON)
