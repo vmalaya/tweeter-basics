@@ -4,10 +4,11 @@ import lombok.*;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(staticName = "of")
+@AllArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
-public class TweetRequest {
-    @NonNull
+public class RetrieveTweetsResponse {
     private String author;
-    private Integer size = 25;
+
+    @NonNull
+    private String body;
 }

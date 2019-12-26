@@ -18,12 +18,12 @@ public class TweetRSocketResource {
     private final TweetRepository repository;
 
     @MessageMapping("tweets")
-    public Flux<TweetResponse> getTweet(@RequestBody TweetRequest request) {
+    public Flux<RetrieveTweetsResponse> getTweet(@RequestBody RetrieveTweetsRequest request) {
         String author = request.getAuthor();
         int size = request.getSize();
         log.info("author {}", request);
         return repository.findAllAuthorTweets(author, size).map(
-                tweet -> TweetResponse.of(tweet.getAuthor(), tweet.getBody()));
+                tweet -> RetrieveTweetsResponse.of(tweet.getAuthor(), tweet.getBody()));
     }
 
     @MessageMapping("send")

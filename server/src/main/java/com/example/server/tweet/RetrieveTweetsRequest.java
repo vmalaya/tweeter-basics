@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TweetRequest {
+public class RetrieveTweetsRequest {
     private String author;
     private int size = 25;
 }

@@ -1,4 +1,4 @@
-package com.example.server.tweet;
+package com.example.client.tweet;
 
 import lombok.*;
 
@@ -6,9 +6,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "of")
 @RequiredArgsConstructor(staticName = "of")
-public class TweetResponse {
-    private String author;
-
+public class RetrieveTweetsRequest {
     @NonNull
-    private String body;
+    private String author;
+    private Integer size = 25;
 }

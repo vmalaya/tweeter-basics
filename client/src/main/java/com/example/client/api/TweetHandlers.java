@@ -2,8 +2,8 @@ package com.example.client.api;
 
 import com.example.client.tweet.SendTweetRequest;
 import com.example.client.tweet.SendTweetResponse;
-import com.example.client.tweet.TweetRequest;
-import com.example.client.tweet.TweetResponse;
+import com.example.client.tweet.RetrieveTweetsRequest;
+import com.example.client.tweet.RetrieveTweetsResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
@@ -27,9 +27,9 @@ public class TweetHandlers {
 
     public Mono<ServerResponse> getTweet(ServerRequest serverRequest) {
         String author = serverRequest.pathVariable("author");
-        Flux<TweetResponse> tweets = requester.flatMapMany(rSocket -> rSocket.route("tweets")
-                .data(Mono.just(TweetRequest.of(author)), TweetRequest.class)
-                .retrieveFlux(TweetResponse.class));
+        Flux<RetrieveTweetsResponse> tweets = requester.flatMapMany(rSocket -> rSocket.route("tweets")
+                .data(Mono.just(RetrieveTweetsRequest.of(author)), RetrieveTweetsRequest.class)
+                .retrieveFlux(RetrieveTweetsResponse.class));
                 // .onBackpressureBuffer(1, log::warn, BufferOverflowStrategy.DROP_OLDEST)
                 // .onErrorContinue((throwable, obj) -> {
                 //     log.error("throwable: {}", throwable.getLocalizedMessage());
@@ -40,7 +40,7 @@ public class TweetHandlers {
         return ServerResponse.ok()
                 //.contentType(MediaType.APPLICATION_STREAM_JSON)
                 .contentType(MediaType.TEXT_EVENT_STREAM)
-                .body(tweets, TweetResponse.class);
+                .body(tweets, RetrieveTweetsResponse.class);
     }
 
     public Mono<ServerResponse> saveTweet(ServerRequest request) {
