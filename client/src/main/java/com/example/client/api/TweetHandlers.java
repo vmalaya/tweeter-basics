@@ -35,7 +35,7 @@ public class TweetHandlers {
         String author = serverRequest.pathVariable("author");
         Flux<TweetResponse> tweets = requester.flatMapMany(rSocket -> rSocket.route("tweets")
                 .data(Mono.just(TweetRequest.of(author)), TweetRequest.class)
-                .retrieveFlux(TweetResponse.class))
+                .retrieveFlux(TweetResponse.class));
                 // .onBackpressureBuffer(1, log::warn, BufferOverflowStrategy.DROP_OLDEST)
                 // .onErrorContinue((throwable, obj) -> {
                 //     log.error("throwable: {}", throwable.getLocalizedMessage());

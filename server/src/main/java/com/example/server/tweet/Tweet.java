@@ -15,10 +15,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @Table(value = "tweets")
 @RequiredArgsConstructor
-public class Tweet implements Persistable<Long> {
+public class Tweet implements Persistable<UUID> {
 
     @Id
-    private Long id;
+    private UUID id;
 
     @NonNull
     private String author;
@@ -29,7 +29,7 @@ public class Tweet implements Persistable<Long> {
     @Override
     public boolean isNew() {
         boolean result = Objects.isNull(id);
-        this.id = result ? 100l : this.id;
+        this.id = result ? UUID.randomUUID() : this.id;
         return result;
     }
 }

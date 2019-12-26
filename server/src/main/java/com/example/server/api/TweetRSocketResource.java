@@ -27,7 +27,7 @@ public class TweetRSocketResource {
         String author = request.getAuthor();
         int size = request.getSize();
         log.info("author {}", request);
-        return repository.findAllAuthorTweets(author, size)
+        return repository.findAllAuthorTweets(author, size).doOnNext(log::warn)
                 .map(tweet -> TweetResponse.of(tweet.getAuthor(), tweet.getBody()));
     }
 
@@ -36,7 +36,7 @@ public class TweetRSocketResource {
         String author = request.getAuthor();
         String body = request.getBody();
         log.info("tweet {}", request);
-        Mono<Tweet> savedTweet = repository.save(new Tweet(author, body));
+        Mono<Tweet> savedTweet = repository.save(new Tweet(author, body)).doOnNext(log::warn);
         return savedTweet.map(tweet -> SendTweetResponse.of(tweet.getAuthor(), tweet.getBody()));
     }
 }
