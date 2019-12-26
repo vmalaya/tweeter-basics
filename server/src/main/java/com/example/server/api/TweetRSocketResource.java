@@ -1,17 +1,17 @@
 package com.example.server.api;
 
 import com.example.server.repository.TweetRepository;
-import com.example.server.tweet.Tweet;
-import com.example.server.tweet.TweetRequest;
-import com.example.server.tweet.TweetResponse;
+import com.example.server.tweet.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.annotation.Transient;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -27,18 +27,16 @@ public class TweetRSocketResource {
         String author = request.getAuthor();
         int size = request.getSize();
         log.info("author {}", request);
-        repository.findById(100l).doOnNext(log::warn);
         return repository.findAllAuthorTweets(author, size)
                 .map(tweet -> TweetResponse.of(tweet.getAuthor(), tweet.getBody()));
     }
 
-//    @Transactional
     @MessageMapping("send")
-    public Mono<Tweet> saveTweet(@RequestBody TweetRequest request) {
+    public Mono<SendTweetResponse> saveTweet(@RequestBody SendTweetRequest request) {
         String author = request.getAuthor();
-        int size = request.getSize();
+        String body = request.getBody();
         log.info("tweet {}", request);
-        Mono<Tweet> savedTweet = repository.save(new Tweet(author, "It is a generated tweet from " + author + "."));
-        return savedTweet;
+        Mono<Tweet> savedTweet = repository.save(new Tweet(author, body));
+        return savedTweet.map(tweet -> SendTweetResponse.of(tweet.getAuthor(), tweet.getBody()));
     }
 }
