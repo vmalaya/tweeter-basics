@@ -5,8 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class TweetRequest {
+@AllArgsConstructor(staticName = "of")
+public class SendTweetResponse {
     private String author;
+    private String body;
 }

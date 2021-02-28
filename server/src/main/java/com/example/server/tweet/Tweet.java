@@ -5,17 +5,31 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.Objects;
+import java.util.UUID;
+
 @Data
-@Table(value = "tweets")
 @NoArgsConstructor
+@Table(value = "tweets")
 @RequiredArgsConstructor
-public class Tweet {
+public class Tweet implements Persistable<UUID> {
+
     @Id
-    private Long id;
+    private UUID id;
+
     @NonNull
     private String author;
+
     @NonNull
     private String body;
+
+    @Override
+    public boolean isNew() {
+        boolean result = Objects.isNull(id);
+        this.id = result ? UUID.randomUUID() : this.id;
+        return result;
+    }
 }
