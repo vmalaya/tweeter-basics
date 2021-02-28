@@ -1,3 +1,14 @@
+# Tweeter-basics
+
+Client-server application. Provides [API] to frontend developer in order to cover functionality of creating and retrieving tweet for specific user.
+
+Project includes following technologies:
+- Spring WebFlux
+- Spring rSocket
+- R2DBC
+- Flyway
+- PostgreSQL
+ 
 ## dev mode
 
 _windows_
@@ -24,3 +35,8 @@ _unix_
 ./mvnw -f server package
 java -jar server/target/*.jar -Dspring.profiles.include=prod
 ```
+<!--
+references
+-->
+
+[API]: api.http
